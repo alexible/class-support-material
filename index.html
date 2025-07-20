@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Operators Playground</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .playground {
+            padding: 30px;
+        }
+
+        .operator-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #007bff;
+        }
+
+        .operator-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .operator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .operator-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .operator-title {
+            color: #495057;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+
+        .input-group label {
+            min-width: 30px;
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .result {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 5px;
+            padding: 12px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            color: #1565c0;
+            font-weight: bold;
+        }
+
+        .increment-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .increment-demo {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .demo-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            margin: 5px;
+        }
+
+        .demo-button:hover {
+            background: #0056b3;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .logical-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            transform: scale(1.2);
+        }
+
+        .status-display {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .playground {
+                padding: 20px;
+            }
+            
+            .operator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .increment-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 C++ Operators Playground</h1>
+            <p>Change the numbers and see how different operators work in real-time!</p>
+        </div>
+
+        <div class="playground">
+            <!-- Arithmetic Operators -->
+            <div class="operator-section">
+                <h2>🔢 Arithmetic Operators</h2>
+                <div class="operator-grid">
+                    <div class="operator-card">
+                        <div class="operator-title">Addition (+)</div>
+                        <div class="input-group">
+                            <label>a:</label>
+                            <input type="number" id="add-a" value="10" oninput="updateArithmetic()">
+                        </div>
+                        <div class="input-group">
+                            <label>b:</label>
+                            <input type="number" id="add-b" value="5" oninput="updateArithmetic()">
+                        </div>
+                        <div class="result" id="add-result">10 + 5 = 15</div>
+                    </div>
+
+                    <div class="operator-card">
+                        <div class="operator-title">Subtraction (-)</div>
+                        <div class="input-group">
+                            <label>a:</label>
+                            <input type="number" id="sub-a" value="15" oninput="updateArithmetic()">
+                        </div>
+                        <div class="input-group">
+                            <label>b:</label>
+                            <input type="number" id="sub-b" value="7" oninput="updateArithmetic()">
+                        </div>
+                        <div class="result" id="sub-result">15 - 7 = 8</div>
+                    </div>
+
+                    <div class="operator-card">
+                        <div class="operator-title">Multiplication (*)</div>
+                        <div class="input-group">
+                            <label>a:</label>
+                            <input type="number" id="mul-a" value="6" oninput="updateArithmetic()">
+                        </div>
+                        <div class="input-group">
+                            <label>b:</label>
+                            <input type="number" id="mul-b" value="4" oninput="updateArithmetic()">
+                        </div>
+                        <div class="result" id="mul-result">6 * 4 = 24</div>
+                    </div>
+
+                    <div class="operator-card">
+                        <div class="operator-title">Division (/)</div>
+                        <div class="input-group">
+                            <label>a:</label>
+                            <input type="number" id="div-a" value="20" oninput="updateArithmetic()">
+                        </div>
+                        <div class="input-group">
+                            <label>b:</label>
+                            <input type="number" id="div-b" value="4" oninput="updateArithmetic()">
+                        </div>
+                        <div class="result" id="div-result">20 / 4 = 5</div>
+                    </div>
+
+                    <div class="operator-card">
+                        <div class="operator-title">Modulus (%)</div>
+                        <div class="input-group">
+                            <label>a:</label>
+                            <input type="number" id="mod-a" value="17" oninput="updateArithmetic()">
+                        </div>
+                        <div class="input-group">
+                            <label>b:</label>
+                            <input type="number" id="mod-b" value="5" oninput="updateArithmetic()">
+                        </div>
+                        <div class="result" id="mod-result">17 % 5 = 2</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison Operators -->
+            <div class="operator-section">
+                <h2>⚖️ Comparison Operators</h2>
+                <div class="comparison-grid">
+                    <div class="operator-card">
+                        <div class="operator-title">Comparison Tests</div>
+                        <div class="input-group">
+                            <label>a:</label>
+                            <input type="number" id="comp-a" value="10" oninput="updateComparison()">
+                        </div>
+                        <div class="input-group">
+                            <label>b:</label>
+                            <input type="number" id="comp-b" value="5" oninput="updateComparison()">
+                        </div>
+                        <div class="result" id="comp-results">
+                            a == b: false<br>
+                            a != b: true<br>
+                            a < b: false<br>
+                            a > b: true<br>
+                            a <= b: false<br>
+                            a >= b: true
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logical Operators -->
+            <div class="operator-section">
+                <h2>🧠 Logical Operators</h2>
+                <div class="logical-demo">
+                    <div class="operator-card">
+                        <div class="operator-title">Boolean Values</div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="bool-a" checked onchange="updateLogical()">
+                            <label for="bool-a">Variable A (true/false)</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="bool-b" onchange="updateLogical()">
+                            <label for="bool-b">Variable B (true/false)</label>
+                        </div>
+                    </div>
+                    <div class="operator-card">
+                        <div class="operator-title">Logical Results</div>
+                        <div class="result" id="logical-results">
+                            A && B: false<br>
+                            A || B: true<br>
+                            !A: false<br>
+                            !B: true
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assignment Operators -->
+            <div class="operator-section">
+                <h2>📝 Assignment Operators</h2>
+                <div class="operator-card">
+                    <div class="operator-title">Assignment Operations</div>
+                    <div class="input-group">
+                        <label>Start:</label>
+                        <input type="number" id="assign-start" value="10" oninput="updateAssignment()">
+                    </div>
+                    <div class="input-group">
+                        <label>Value:</label>
+                        <input type="number" id="assign-value" value="3" oninput="updateAssignment()">
+                    </div>
+                    <div class="result" id="assign-results">
+                        x = 10<br>
+                        x += 3 → x = 13<br>
+                        x -= 3 → x = 10<br>
+                        x *= 3 → x = 30<br>
+                        x /= 3 → x = 10<br>
+                        x %= 3 → x = 1
+                    </div>
+                </div>
+            </div>
+
+            <!-- Increment/Decrement -->
+            <div class="operator-section">
+                <h2>⬆️⬇️ Increment & Decrement</h2>
+                <div class="increment-section">
+                    <div class="increment-demo">
+                        <div class="operator-title">Pre-increment (++a)</div>
+                        <div>Current value: <span id="pre-value">5</span></div>
+                        <button class="demo-button" onclick="preIncrement()">++a</button>
+                        <button class="demo-button" onclick="preDecrement()">--a</button>
+                        <button class="demo-button" onclick="resetPre()">Reset</button>
+                        <div class="status-display" id="pre-status">Click ++a to increment first, then use value</div>
+                    </div>
+                    <div class="increment-demo">
+                        <div class="operator-title">Post-increment (a++)</div>
+                        <div>Current value: <span id="post-value">5</span></div>
+                        <button class="demo-button" onclick="postIncrement()">a++</button>
+                        <button class="demo-button" onclick="postDecrement()">a--</button>
+                        <button class="demo-button" onclick="resetPost()">Reset</button>
+                        <div class="status-display" id="post-status">Click a++ to use current value, then increment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for increment/decrement demo
+        let preValue = 5;
+        let postValue = 5;
+
+        // Update arithmetic operations
+        function updateArithmetic() {
+            // Addition
+            const addA = parseFloat(document.getElementById('add-a').value) || 0;
+            const addB = parseFloat(document.getElementById('add-b').value) || 0;
+            document.getElementById('add-result').textContent = `${addA} + ${addB} = ${addA + addB}`;
+
+            // Subtraction
+            const subA = parseFloat(document.getElementById('sub-a').value) || 0;
+            const subB = parseFloat(document.getElementById('sub-b').value) || 0;
+            document.getElementById('sub-result').textContent = `${subA} - ${subB} = ${subA - subB}`;
+
+            // Multiplication
+            const mulA = parseFloat(document.getElementById('mul-a').value) || 0;
+            const mulB = parseFloat(document.getElementById('mul-b').value) || 0;
+            document.getElementById('mul-result').textContent = `${mulA} * ${mulB} = ${mulA * mulB}`;
+
+            // Division
+            const divA = parseFloat(document.getElementById('div-a').value) || 0;
+            const divB = parseFloat(document.getElementById('div-b').value) || 1;
+            const divResult = divB !== 0 ? (divA / divB).toFixed(2) : 'Cannot divide by zero';
+            document.getElementById('div-result').textContent = `${divA} / ${divB} = ${divResult}`;
+
+            // Modulus
+            const modA = parseInt(document.getElementById('mod-a').value) || 0;
+            const modB = parseInt(document.getElementById('mod-b').value) || 1;
+            const modResult = modB !== 0 ? modA % modB : 'Cannot modulo by zero';
+            document.getElementById('mod-result').textContent = `${modA} % ${modB} = ${modResult}`;
+        }
+
+        // Update comparison operations
+        function updateComparison() {
+            const a = parseFloat(document.getElementById('comp-a').value) || 0;
+            const b = parseFloat(document.getElementById('comp-b').value) || 0;
+            
+            const results = `
+                ${a} == ${b}: ${a == b}<br>
+                ${a} != ${b}: ${a != b}<br>
+                ${a} < ${b}: ${a < b}<br>
+                ${a} > ${b}: ${a > b}<br>
+                ${a} <= ${b}: ${a <= b}<br>
+                ${a} >= ${b}: ${a >= b}
+            `;
+            document.getElementById('comp-results').innerHTML = results;
+        }
+
+        // Update logical operations
+        function updateLogical() {
+            const a = document.getElementById('bool-a').checked;
+            const b = document.getElementById('bool-b').checked;
+            
+            const results = `
+                A && B: ${a && b}<br>
+                A || B: ${a || b}<br>
+                !A: ${!a}<br>
+                !B: ${!b}
+            `;
+            document.getElementById('logical-results').innerHTML = results;
+        }
+
+        // Update assignment operations
+        function updateAssignment() {
+            const start = parseFloat(document.getElementById('assign-start').value) || 0;
+            const value = parseFloat(document.getElementById('assign-value').value) || 0;
+            
+            const results = `
+                x = ${start}<br>
+                x += ${value} → x = ${start + value}<br>
+                x -= ${value} → x = ${start - value}<br>
+                x *= ${value} → x = ${start * value}<br>
+                x /= ${value} → x = ${value !== 0 ? (start / value).toFixed(2) : 'Error'}<br>
+                x %= ${value} → x = ${value !== 0 ? start % value : 'Error'}
+            `;
+            document.getElementById('assign-results').innerHTML = results;
+        }
+
+        // Pre-increment functions
+        function preIncrement() {
+            preValue++;
+            document.getElementById('pre-value').textContent = preValue;
+            document.getElementById('pre-status').textContent = `++a: Incremented to ${preValue}, then returned ${preValue}`;
+        }
+
+        function preDecrement() {
+            preValue--;
+            document.getElementById('pre-value').textContent = preValue;
+            document.getElementById('pre-status').textContent = `--a: Decremented to ${preValue}, then returned ${preValue}`;
+        }
+
+        function resetPre() {
+            preValue = 5;
+            document.getElementById('pre-value').textContent = preValue;
+            document.getElementById('pre-status').textContent = 'Click ++a to increment first, then use value';
+        }
+
+        // Post-increment functions
+        function postIncrement() {
+            const oldValue = postValue;
+            postValue++;
+            document.getElementById('post-value').textContent = postValue;
+            document.getElementById('post-status').textContent = `a++: Returned ${oldValue}, then incremented to ${postValue}`;
+        }
+
+        function postDecrement() {
+            const oldValue = postValue;
+            postValue--;
+            document.getElementById('post-value').textContent = postValue;
+            document.getElementById('post-status').textContent = `a--: Returned ${oldValue}, then decremented to ${postValue}`;
+        }
+
+        function resetPost() {
+            postValue = 5;
+            document.getElementById('post-value').textContent = postValue;
+            document.getElementById('post-status').textContent = 'Click a++ to use current value, then increment';
+        }
+
+        // Initialize all displays
+        updateArithmetic();
+        updateComparison();
+        updateLogical();
+        updateAssignment();
+    </script>
+</body>
+</html>
